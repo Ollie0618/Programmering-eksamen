@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sammenligning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Sammenlign kategorier</h1>
+
+    <form method="post">
+        <label>Vælg kategori 1:</label>
+        <select name="category1">
+            <option value="Elektronik">Elektronik</option>
+            <option value="Møbler">Møbler</option>
+            <option value="Personlig pleje">Personlig pleje</option>
+            <option value="Tøj">Tøj</option>
+        </select>
+
+        <label>Vælg kategori 2:</label>
+        <select name="category2">
+            <option value="Elektronik">Elektronik</option>
+            <option value="Møbler">Møbler</option>
+            <option value="Personlig pleje">Personlig pleje</option>
+            <option value="Tøj">Tøj</option>
+        </select>
+
+        <button type="submit">Sammenlign</button>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <h2>Resultat</h2>
+        <p><strong>{{ result[0] }}</strong>: {{ result[1] }} kr</p>
+        <p><strong>{{ result[2] }}</strong>: {{ result[3] }} kr</p>
+    </div>
+    {% endif %}
+
+    <div class="container" style="text-align:center; margin-top:20px;">
+        <a href="/">Tilbage til forsiden</a>
+    </div>
+
+</body>
+</html>

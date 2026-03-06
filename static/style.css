@@ -1,0 +1,134 @@
+/* Generelt layout */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* Navigation */
+a {
+    text-decoration: none;
+    color: white;
+    background-color: #0077cc;
+    padding: 8px 14px;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+a:hover {
+    background-color: #005fa3;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+/* Tabel */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #0077cc;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Formular */
+form {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Knap */
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Resultat box */
+.result {
+    background: white;
+    padding: 20px;
+    width: 400px;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.tables-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 30px;
+    align-items: start;
+}
+
+.table-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.table-box h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.table-box table {
+    width: 100%;
+    margin-top: 0;
+}
+
+/* Gør layoutet pænt på mobil */
+@media (max-width: 900px) {
+    .tables-grid {
+        grid-template-columns: 1fr;
+    }
+}

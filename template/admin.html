@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Tilføj produkt</h1>
+
+    <form method="post">
+        <label>Produktnavn:</label>
+        <input type="text" name="name" required>
+
+        <label>Kategori:</label>
+        <select name="category" required>
+            <option value="Elektronik">Elektronik</option>
+            <option value="Møbler">Møbler</option>
+            <option value="Personlig pleje">Personlig pleje</option>
+            <option value="Tøj">Tøj</option>
+        </select>
+
+        <label>Pris:</label>
+        <input type="number" name="price" step="0.01" required>
+
+        <label>Antal solgt:</label>
+        <input type="number" name="quantity" required>
+
+        <button type="submit">Gem produkt</button>
+    </form>
+
+    <div class="container" style="text-align:center; margin-top:20px;">
+        <a href="/">Tilbage til forsiden</a>
+    </div>
+
+</body>
+</html>

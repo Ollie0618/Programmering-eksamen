@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forside</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Produktoversigt</h1>
+
+    <div class="container">
+        <a href="/admin">Tilføj produkt</a>
+        <a href="/comparison">Sammenlign kategorier</a>
+        <a href="/allproducts">Alle produkter</a>
+
+        <table>
+            <tr>
+                <th>Navn</th>
+                <th>Kategori</th>
+                <th>Pris</th>
+                <th>Antal</th>
+                <th>Indtjening</th>
+                <th>Handling</th>
+            </tr>
+
+            {% for p in products %}
+            <tr>
+                <td>{{ p[1] }}</td>
+                <td>{{ p[2] }}</td>
+                <td>{{ p[3] }} kr</td>
+                <td>{{ p[4] }}</td>
+                <td>{{ p[3] * p[4] }} kr</td>
+                <td><a href="/delete/{{ p[0] }}">Slet</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>

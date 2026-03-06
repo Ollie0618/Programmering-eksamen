@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Alle produkter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>Alle solgte produkter</h1>
+
+<div class="container">
+    <a href="/">Forside</a>
+
+    <div class="tables-grid">
+
+        <div class="table-box">
+            <h2>Elektronik</h2>
+            <table>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Indtjening</th>
+                </tr>
+                {% for p in elektronik %}
+                <tr>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[3] }} kr</td>
+                    <td>{{ p[4] }}</td>
+                    <td>{{ p[3] * p[4] }} kr</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="table-box">
+            <h2>Møbler</h2>
+            <table>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Indtjening</th>
+                </tr>
+                {% for p in moebler %}
+                <tr>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[3] }} kr</td>
+                    <td>{{ p[4] }}</td>
+                    <td>{{ p[3] * p[4] }} kr</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="table-box">
+            <h2>Personlig pleje</h2>
+            <table>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Indtjening</th>
+                </tr>
+                {% for p in pleje %}
+                <tr>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[3] }} kr</td>
+                    <td>{{ p[4] }}</td>
+                    <td>{{ p[3] * p[4] }} kr</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="table-box">
+            <h2>Tøj</h2>
+            <table>
+                <tr>
+                    <th>Produkt</th>
+                    <th>Pris</th>
+                    <th>Antal</th>
+                    <th>Indtjening</th>
+                </tr>
+                {% for p in toj %}
+                <tr>
+                    <td>{{ p[1] }}</td>
+                    <td>{{ p[3] }} kr</td>
+                    <td>{{ p[4] }}</td>
+                    <td>{{ p[3] * p[4] }} kr</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
