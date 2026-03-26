@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sammenligning</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .download-icon {
+            width: 26px;
+            height: 26px;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .download-icon:hover {
+            opacity: 1;
+            transform: scale(1.15);
+        }
+    </style>
+</head>
+<body>
+
+<div class="comparison-page">
+
+    <h1>Sammenligning</h1>
+
+    <form method="post" class="comparison-form">
+
+        <div class="select-group">
+            <label for="category1">Kategori 1</label>
+            <select name="category1" id="category1">
+                {% set sel1 = request.form.get('category1', '') %}
+                <option value="" disabled {% if not sel1 %}selected{% endif %}>Vælg kategori</option>
+
+                {% for cat in ['Elektronik', 'Møbler', 'Personlig pleje', 'Tøj'] %}
+                    <option value="{{ cat }}" {% if cat == sel1 %}selected{% endif %}>
+                        {{ cat }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="select-group">
+            <label for="category2">Kategori 2</label>
+            <select name="category2" id="category2">
+                {% set sel2 = request.form.get('category2', '') %}
+                <option value="" disabled {% if not sel2 %}selected{% endif %}>Vælg kategori</option>
+
+                {% for cat in ['Elektronik', 'Møbler', 'Personlig pleje', 'Tøj'] %}
+                    <option value="{{ cat }}" {% if cat == sel2 %}selected{% endif %}>
+                        {{ cat }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="comparison-submit">
+            <button type="submit">Sammenlign</button>
+        </div>
+
+    </form>
+
+    {% if result %}
+
+    <div id="chart-data"
+         data-category1="{{ result.category1 }}"
+         data-category2="{{ result.category2 }}"
+         data-revenue1="{{ result.revenue1 }}"
+         data-revenue2="{{ result.revenue2 }}"
+         data-sold1="{{ result.sold1 }}"
+         data-sold2="{{ result.sold2 }}"
+         data-avg1="{{ result.avg_price1 }}"
+         data-avg2="{{ result.avg_price2 }}">
+    </div>
+
+    <div class="comparison-charts-layout">
+
+        <div class="chart-panel">
+            <div class="chart-header">
+                <div class="panel-title">Omsætning (kr)</div>
+                <img src="{{ url_for('static', filename='icons/download.png') }}" 
+                     class="download-icon"
+                     onclick="downloadChart('revenueChart')">
+            </div>
+            <canvas id="revenueChart"></canvas>
+        </div>
+
+        <div class="chart-panel">
+            <div class="chart-header">
+                <div class="panel-title">Antal solgte produkter</div>
+                <img src="{{ url_for('static', filename='icons/download.png') }}" 
+                     class="download-icon"
+                     onclick="downloadChart('soldChart')">
+            </div>
+            <canvas id="soldChart"></canvas>
+        </div>
+
+        <div class="chart-panel">
+            <div class="chart-header">
+                <div class="panel-title">Gennemsnitspris pr. produkt (kr)</div>
+                <img src="{{ url_for('static', filename='icons/download.png') }}" 
+                     class="download-icon"
+                     onclick="downloadChart('avgChart')">
+            </div>
+            <canvas id="avgChart"></canvas>
+        </div>
+
+    </div>
+
+    <div class="difference-strip">
+        <div class="difference-item">
+            <span class="difference-label">Forskel i omsætning</span>
+            <span class="difference-value">{{ result.revenue_difference }} kr</span>
+        </div>
+
+        <div class="difference-item">
+            <span class="difference-label">Forskel i antal solgt</span>
+            <span class="difference-value">{{ result.sold_difference }} stk</span>
+        </div>
+
+        <div class="difference-item">
+            <span class="difference-label">Forskel i gennemsnitspris</span>
+            <span class="difference-value">{{ result.avg_price_difference }} kr</span>
+        </div>
+    </div>
+
+    <script>
+        const dataElement = document.getElementById("chart-data");
+
+        const category1 = dataElement.dataset.category1;
+        const category2 = dataElement.dataset.category2;
+
+        const revenue1 = Number(dataElement.dataset.revenue1);
+        const revenue2 = Number(dataElement.dataset.revenue2);
+
+        const sold1 = Number(dataElement.dataset.sold1);
+        const sold2 = Number(dataElement.dataset.sold2);
+
+        const avg1 = Number(dataElement.dataset.avg1);
+        const avg2 = Number(dataElement.dataset.avg2);
+
+        const commonOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                x: {
+                    ticks: { color: "#d9dee7" },
+                    grid: { color: "rgba(255,255,255,0.08)" }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: "#d9dee7" },
+                    grid: { color: "rgba(255,255,255,0.08)" }
+                }
+            }
+        };
+
+        const colors = ["rgba(118, 90, 255, 0.82)", "rgba(255, 64, 96, 0.82)"];
+        const borders = ["rgba(118, 90, 255, 1)", "rgba(255, 64, 96, 1)"];
+
+        new Chart(document.getElementById("revenueChart"), {
+            type: "bar",
+            data: {
+                labels: [category1, category2],
+                datasets: [{
+                    data: [revenue1, revenue2],
+                    backgroundColor: colors,
+                    borderColor: borders,
+                    borderWidth: 1.5,
+                    borderRadius: 10
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById("soldChart"), {
+            type: "bar",
+            data: {
+                labels: [category1, category2],
+                datasets: [{
+                    data: [sold1, sold2],
+                    backgroundColor: colors,
+                    borderColor: borders,
+                    borderWidth: 1.5,
+                    borderRadius: 10
+                }]
+            },
+            options: commonOptions
+        });
+
+        new Chart(document.getElementById("avgChart"), {
+            type: "bar",
+            data: {
+                labels: [category1, category2],
+                datasets: [{
+                    data: [avg1, avg2],
+                    backgroundColor: colors,
+                    borderColor: borders,
+                    borderWidth: 1.5,
+                    borderRadius: 10
+                }]
+            },
+            options: commonOptions
+        });
+
+        function downloadChart(chartId) {
+            const canvas = document.getElementById(chartId);
+            const link = document.createElement("a");
+            link.download = chartId + ".png";
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        }
+
+        const select1 = document.getElementById("category1");
+        const select2 = document.getElementById("category2");
+
+        function updateOptions() {
+            const val1 = select1.value;
+            const val2 = select2.value;
+
+            for (let option of select1.options) option.disabled = false;
+            for (let option of select2.options) option.disabled = false;
+
+            if (val1) {
+                for (let option of select2.options) {
+                    if (option.value === val1) option.disabled = true;
+                }
+            }
+
+            if (val2) {
+                for (let option of select1.options) {
+                    if (option.value === val2) option.disabled = true;
+                }
+            }
+        }
+
+        window.addEventListener("load", updateOptions);
+        select1.addEventListener("change", updateOptions);
+        select2.addEventListener("change", updateOptions);
+
+    </script>
+
+    {% endif %}
+
+    <div class="back-link">
+        <a href="/">Tilbage til forsiden</a>
+    </div>
+
+</div>
+
+</body>
+</html>

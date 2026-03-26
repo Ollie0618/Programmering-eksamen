@@ -1,134 +1,416 @@
-/* Generelt layout */
+/* =========================
+   GENERELT
+   ========================= */
+
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f8;
+    font-family: "Segoe UI", Arial, sans-serif;
     margin: 0;
     padding: 0;
+    color: #f2f4f8;
+    background: linear-gradient(135deg, #141b26, #1b2432 45%, #111722);
 }
 
-/* Header */
 h1 {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px;
+    font-size: 2.7rem;
+    color: #f7f8fb;
+    letter-spacing: 0.5px;
 }
 
-/* Navigation */
+.container {
+    width: 85%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/* =========================
+   FORSIDE (NYT)
+   ========================= */
+
+.homepage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: #c9d2df;
+    margin-bottom: 35px;
+}
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
 a {
     text-decoration: none;
     color: white;
-    background-color: #0077cc;
-    padding: 8px 14px;
-    border-radius: 5px;
-    margin-right: 10px;
+    padding: 13px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
+}
+
+/* forskellige farver til knapper */
+
+.nav a:nth-child(1) {
+    background: linear-gradient(135deg, #12b76a, #0e9f5a);
+}
+
+.nav a:nth-child(2) {
+    background: linear-gradient(135deg, #765aff, #5a43d6);
+}
+
+.nav a:nth-child(3) {
+    background: linear-gradient(135deg, #ff8a3d, #ff5a2c);
 }
 
 a:hover {
-    background-color: #005fa3;
+    transform: translateY(-3px) scale(1.05);
 }
 
-/* Container */
-.container {
-    width: 80%;
-    margin: auto;
-    margin-top: 30px;
-}
+/* =========================
+   TABELLER
+   ========================= */
 
-/* Tabel */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    background: white;
+    background: #253140;
+    border-radius: 14px;
+    overflow: hidden;
+    color: #e9edf4;
 }
 
 th, td {
-    padding: 10px;
+    padding: 12px;
     text-align: center;
 }
 
 th {
-    background-color: #0077cc;
+    background: #765aff;
     color: white;
+    font-weight: 600;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background: #2b3747;
 }
 
-/* Formular */
-form {
-    background: white;
-    padding: 20px;
-    width: 400px;
-    margin: auto;
-    margin-top: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+tr:hover {
+    background: #324154;
 }
 
-input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-/* Knap */
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #218838;
-}
-
-/* Resultat box */
-.result {
-    background: white;
-    padding: 20px;
-    width: 400px;
-    margin: auto;
-    margin-top: 20px;
-    border-radius: 8px;
-    text-align: center;
-}
+/* =========================
+   GRID / BOKSE
+   ========================= */
 
 .tables-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 25px;
     margin-top: 30px;
-    align-items: start;
+}
+
+.table-box,
+.result-box,
+form {
+    background: #253140;
+    border-radius: 18px;
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.04);
 }
 
 .table-box {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    padding: 20px;
 }
 
 .table-box h2 {
     text-align: center;
     margin-top: 0;
     margin-bottom: 15px;
+    color: #f3f6fb;
 }
 
-.table-box table {
+/* =========================
+   FORMULAR
+   ========================= */
+
+form {
+    padding: 25px;
+    width: 420px;
+    margin: 30px auto 0 auto;
+}
+
+input,
+select {
     width: 100%;
-    margin-top: 0;
+    padding: 11px 12px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    border: 1px solid #3b4a61;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: #1c2533;
+    color: #f2f4f8;
 }
 
-/* Gør layoutet pænt på mobil */
+label {
+    color: #dce3ee;
+    font-weight: 600;
+}
+
+button {
+    background: linear-gradient(135deg, #12b76a, #0e9f5a);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #18c964, #10b15a);
+}
+
+/* =========================
+   SAMMENLIGNINGSSIDE
+   ========================= */
+
+.comparison-page {
+    width: 94%;
+    max-width: 1600px;
+    margin: 25px auto 40px auto;
+    padding: 28px 26px 34px;
+    background: rgba(16, 23, 34, 0.82);
+    border-radius: 24px;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.30);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.comparison-form {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 26px auto;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 28px;
+    align-items: end;
+}
+
+.select-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.select-group label {
+    margin-bottom: 8px;
+    color: #f2f4f8;
+    font-size: 1rem;
+}
+
+.comparison-submit {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    padding-bottom: 2px;
+}
+
+.category-top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 900px;
+    margin: 10px auto 24px auto;
+}
+
+.category-pill {
+    text-align: center;
+    background: #253140;
+    color: #f7f8fb;
+    padding: 18px 20px;
+    border-radius: 16px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+.comparison-charts-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 26px;
+    margin-top: 18px;
+    align-items: stretch;
+}
+
+.chart-panel {
+    background: #253140;
+    border-radius: 22px;
+    padding: 18px 18px 16px;
+    min-height: 360px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.25;
+    text-align: left;
+}
+
+.chart-panel canvas {
+    width: 100% !important;
+    height: 280px !important;
+    margin-top: 8px;
+}
+
+.difference-strip {
+    margin-top: 26px;
+    background: #253140;
+    border-radius: 22px;
+    padding: 24px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+}
+
+.difference-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.difference-label {
+    font-size: 1rem;
+    color: #d7dde8;
+    font-weight: 600;
+}
+
+.difference-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #ffd54a;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 32px;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1200px) {
+    .comparison-charts-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .difference-strip {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 900px) {
     .tables-grid {
         grid-template-columns: 1fr;
     }
+
+    form {
+        width: 90%;
+    }
+
+    .comparison-form {
+        grid-template-columns: 1fr;
+    }
+
+    .category-top-row {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    h1 {
+        font-size: 2.1rem;
+    }
+
+    .panel-title {
+        font-size: 1.15rem;
+    }
+
+    .difference-value {
+        font-size: 1.6rem;
+    }
+}
+
+.welcome-box {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.welcome-box p {
+    font-size: 1.4rem;
+    color: #dce3ee;
+}
+
+.welcome-box strong {
+    color: #12b76a;
+    font-size: 1.6rem;
+}
+
+.revenue {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1296b7;
+    margin-top: 10px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.download-icon {
+    cursor: pointer;
+    font-size: 1.3rem;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+}
+
+.download-icon:hover {
+    opacity: 1;
+    transform: scale(1.2);
 }
